@@ -54,7 +54,7 @@ class BeanstalkTask extends Amazon
 
     public function main() {
         parent::main();
-        $client = $this->getAwsClient()->get("ElasticBeanstalk");
+        $client = $this->getAwsClient()->createElasticBeanstalk();
 
         $client->createApplicationVersion(array(
             "ApplicationName" => $this->getApplication(),

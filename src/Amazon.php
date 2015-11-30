@@ -2,7 +2,6 @@
 namespace Corley\Phing;
 
 use Task;
-use Aws\Common\Aws;
 
 abstract class Amazon extends Task
 {
@@ -57,13 +56,19 @@ abstract class Amazon extends Task
 
     public function main()
     {
-        $options = array('key' => $this->getKey(), 'secret' => $this->getSecret());
+        $options = [
+            'credentials' => [
+                'key' => $this->getKey(),
+                'secret' => $this->getSecret()
+            ],
+            'version' => 'latest'
+        ];
 
         if ($this->getRegion()) {
-            $options["region"] = $this->getRegion();
+            $options['region'] = $this->getRegion();
         }
 
-        $this->setAwsClient(Aws::factory($options));
+        $this->setAwsClient(new \Aws\Sdk($options));
     }
 }
 

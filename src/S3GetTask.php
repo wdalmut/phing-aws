@@ -1,18 +1,18 @@
 <?php
 namespace Corley\Phing;
 
-class S3PutTask extends Amazon
+class S3GetTask extends Amazon
 {
     private $bucket;
     private $object;
     private $source;
 
-    public function getSource()
+    public function getTarget()
     {
         return $this->source;
     }
 
-    public function setSource($source)
+    public function setTarget($source)
     {
         $this->source = $source;
         return $this;
@@ -44,10 +44,10 @@ class S3PutTask extends Amazon
     {
         parent::main();
         $client = $this->getAwsClient()->createS3();
-        $client->putObject(array(
+        $client->getObject(array(
             'Bucket'       => $this->getBucket(),
             'Key'          => $this->getObject(),
-            'SourceFile'   => $this->getSource()
+            'SaveAs'       => is_dir($this->getTarget()) ? $this->getTarget() . $this->getObject() : $this->getTarget()
         ));
     }
 }
