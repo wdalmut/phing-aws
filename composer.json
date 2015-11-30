@@ -4,7 +4,7 @@
   "keywords": ["phing", "aws", "elasticbeanstalk", "s3"],
   "require": {
     "phing/phing": "~2",
-    "aws/aws-sdk-php": "~2"
+    "aws/aws-sdk-php": "~3"
   },
   "authors": [
     {
