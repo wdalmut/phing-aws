@@ -24,6 +24,28 @@ Deploy your bundle in AWS ElasticBeanstalk
 </project>
 ```
 
+## CodeDeploy
+
+Deploy your bundle in AWS CodeDeploy
+
+```xml
+<project>
+    <taskdef name="codedeploy" classname="Corley\Phing\CodeDeployTask" />
+    <target name="deploy" depends="upload">
+        <echo msg="Deploy application '${APP_NAME}' with CodeDeploy using name '${BUNDLE_NAME}'" />
+        <codedeploy
+            key="${amazon.key}"
+            secret="${amazon.secret}"
+            region="${amazon.region}"
+            application="${APP_NAME}"
+            version="${BUNDLE_NAME}"
+            bucket="${amazon.bucket}"
+            object="${BUNDLE_NAME_ZIP}"
+            />
+    </target>
+</project>
+```
+
 ## Upload on S3
 
 ```xml
